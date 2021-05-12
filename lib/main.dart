@@ -18,9 +18,6 @@ class MyApp extends StatelessWidget {
 
 class NutritionHomePage extends StatefulWidget {
 
-  final title = 'Today\'s Nutrition';
-  final textPlaceholder = '1254 Calories \n 54g Protein';
-
   @override
   _NutritionHomePageState createState() => _NutritionHomePageState();
 }
