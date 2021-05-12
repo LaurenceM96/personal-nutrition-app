@@ -30,8 +30,8 @@ class _NutritionHomePageState extends State<NutritionHomePage> {
   final title = 'Today\'s Nutrition';
   final textPlaceholder = '1254 Calories \n 54g Protein';
 
-  var consumedMeals = ['coco pops', 'apple'];
-  var meals = {'coco pops':'500,2.5', 'apple':'100,1.5'};
+  var consumedMeals = ['coco pops', 'peach'];
+  var meals = {'coco pops':'500,2.5', 'peach':'100,1.5'};
 
   @override
   Widget build(BuildContext context) {
