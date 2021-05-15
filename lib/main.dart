@@ -30,6 +30,8 @@ class _NutritionHomePageState extends State<NutritionHomePage> {
   var consumedMeals = ['coco pops', 'apricot'];
   var meals = {'coco pops':'500,2.5', 'apricot':'100,1.5'};
 
+  bool _visible = false;
+
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
@@ -56,7 +58,7 @@ class _NutritionHomePageState extends State<NutritionHomePage> {
                 floating: false,
                 // Display a placeholder widget to visualize the shrinking size.
                 flexibleSpace: FlexibleSpaceBar(
-                  titlePadding: EdgeInsetsDirectional.only(bottom: 92),
+                  titlePadding: EdgeInsetsDirectional.only(bottom: 92) ,
                   centerTitle: true,
                   title: Text(
                       textPlaceholder,
@@ -133,7 +135,9 @@ class _NutritionHomePageState extends State<NutritionHomePage> {
                       width: 65.0,
                       height: 65.0,
                       child: FloatingActionButton(
-                        onPressed: (){},
+                        onPressed: (){setState(() {
+                          _visible ? _visible = false : _visible = true;
+                        });},
                         backgroundColor: Colors.orange,
                         child: Icon(Icons.add, size: 48.0),
                         elevation: 0.1,
@@ -165,6 +169,21 @@ class _NutritionHomePageState extends State<NutritionHomePage> {
                   ),
                 ],
               ),
+            ),
+          ),
+          Positioned(
+            bottom: navigationBarHeight + size.height*0.05,
+            left: size.width*0.05,
+            child: FloatingMenuItem(
+                width: size.width*0.9,
+                height: 80,
+                color: Colors.orange,
+                text: "TEST",
+                textColor: Colors.white,
+                visible: _visible,
+                onClick: () {setState(() {
+                  print(_visible);
+                });},
             ),
           ),
         ],
@@ -262,6 +281,55 @@ class ConsumedMealListItem extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+}
+
+class FloatingMenuItem extends StatelessWidget {
+
+  FloatingMenuItem({
+    required this.width,
+    required this.height,
+    required this.color,
+    required this.text,
+    required this.textColor,
+    required this.onClick,
+    required this.visible,
+  });
+
+  final double width;
+  final double height;
+  final Color color;
+  final String text;
+  final Color textColor;
+  final Function onClick;
+  final bool visible;
+
+  @override
+  Widget build(BuildContext context) {
+    return Visibility(
+      visible: visible,
+      child: AnimatedContainer(
+          duration: Duration(seconds: 2),
+          width: width,
+          height: height,
+          decoration: BoxDecoration(
+            color: color,
+            borderRadius: BorderRadius.circular(25.0),
+          ),
+          child: Material( //The Inkwell needs to be wrapped in Material widget so the ripple effect shows
+            color: Colors.transparent,
+            child: InkWell( //This is a widget that provides onTap functionality
+                onTap: () => onClick(),
+                child: Column( // We wrap the text in a column here to center the text vertically
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(text, style: TextStyle(color: textColor, fontSize: height*0.5), textAlign: TextAlign.center),
+                  ],
+                ),
+            ),
+          ),
+        ),
     );
   }
 }
