@@ -259,13 +259,37 @@ class _NutritionHomePageState extends State<NutritionHomePage>
                     color: Colors.orange,
                     text: "Create new meal",
                     textColor: Colors.white,
-                    onClick: () {},
+                    onClick: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => SecondRoute()),
+                      );
+                    }, //this is where you are going to make a function for creating a new meal
                   ),
                 ),
               ),
             ]),
           )
         ],
+      ),
+    );
+  }
+}
+
+class SecondRoute extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Second Route"),
+      ),
+      body: Center(
+        child: ElevatedButton(
+          onPressed: () {
+            // Navigate back to first route when tapped.
+          },
+          child: Text('Suck me off Laurence, I am an app development god!'),
+        ),
       ),
     );
   }
@@ -380,7 +404,7 @@ class ConsumedMealListItem extends StatelessWidget {
   }
 }
 
-class FloatingMenuItem extends StatelessWidget {
+class FloatingMenuItem extends StatelessWidget { //this is the floating menu item
   FloatingMenuItem({
     required this.width,
     required this.height,
