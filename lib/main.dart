@@ -281,14 +281,14 @@ class SecondRoute extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Second Route"),
+        title: Text("Create a new meal"),
       ),
       body: Center(
         child: ElevatedButton(
           onPressed: () {
-            // Navigate back to first route when tapped.
+            Navigator.pop(context);
           },
-          child: Text('Suck me off Laurence, I am an app development god!'),
+          child: Text('Manns got me working on the sabath, you get me?'),
         ),
       ),
     );
