@@ -288,7 +288,7 @@ class SecondRoute extends StatelessWidget {
           onPressed: () {
             Navigator.pop(context);
           },
-          child: Text('Manns got me working on the sabath, you get me?'),
+          child: Text('Manns got me working on the sabath now at 10pm, you get me?'),
         ),
       ),
     );
