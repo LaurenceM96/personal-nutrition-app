@@ -50,6 +50,8 @@ class _NutritionHomePageState extends State<NutritionHomePage>
       end: Offset.zero
   ).animate(CurvedAnimation(parent: _animationController2, curve: Curves.ease));
 
+  bool _menuVisibility = false;
+
   // @override
   // void initState() {
   //   super.initState();
@@ -69,6 +71,8 @@ class _NutritionHomePageState extends State<NutritionHomePage>
   double getRadiansFromDegrees(double degree) {
     return degree * 3.1415926535897932 / 180;
   }
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -98,7 +102,7 @@ class _NutritionHomePageState extends State<NutritionHomePage>
                 flexibleSpace: FlexibleSpaceBar(
                   titlePadding: EdgeInsetsDirectional.only(bottom: 92),
                   centerTitle: true,
-                  title: Text(textPlaceholder,
+                  title: Text(_menuVisibility.toString(),
                       style: TextStyle(
                         color: Colors.black,
                         fontSize: 25.0,
@@ -183,7 +187,11 @@ class _NutritionHomePageState extends State<NutritionHomePage>
                               if (_animationController2.isCompleted) {
                                 _animationController.reverse();
                                 Future.delayed(Duration(milliseconds: 60), () {_animationController2.reverse();});
+                                Future.delayed(Duration(milliseconds: 60 + _animationController.duration!.inMilliseconds), () {setState(() {
+                                  _menuVisibility = false;
+                                });});
                               } else {
+                                _menuVisibility = true;
                                 _animationController.forward();
                                 Future.delayed(Duration(milliseconds: 60), () {_animationController2.forward();});
                               }
@@ -232,13 +240,16 @@ class _NutritionHomePageState extends State<NutritionHomePage>
                 position: _menuButtonSlideAnimation,
                 child: FadeTransition(
                   opacity: _menuButtonOpacityAnimation,
-                  child: FloatingMenuItem(
-                    width: size.width * 0.9,
-                    height: navigationBarHeight/2,
-                    color: Colors.orange,
-                    text: "Record consumed meal",
-                    textColor: Colors.white,
-                    onClick: () {},
+                  child: Visibility(
+                    visible: _menuVisibility,
+                    child: FloatingMenuItem(
+                      width: size.width * 0.9,
+                      height: navigationBarHeight/2,
+                      color: Colors.orange,
+                      text: "Record consumed meal",
+                      textColor: Colors.white,
+                      onClick: () {},
+                    ),
                   ),
                 ),
               ),
@@ -253,18 +264,21 @@ class _NutritionHomePageState extends State<NutritionHomePage>
                 position: _menuButtonTwoSlideAnimation,
                 child: FadeTransition(
                   opacity: _menuButtonTwoOpacityAnimation,
-                  child: FloatingMenuItem(
-                    width: size.width * 0.9,
-                    height: navigationBarHeight/2,
-                    color: Colors.orange,
-                    text: "Create new meal",
-                    textColor: Colors.white,
-                    onClick: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => SecondRoute()),
-                      );
-                    }, //this is where you are going to make a function for creating a new meal
+                  child: Visibility(
+                    visible: _menuVisibility,
+                    child: FloatingMenuItem(
+                      width: size.width * 0.9,
+                      height: navigationBarHeight/2,
+                      color: Colors.orange,
+                      text: "Create new meal",
+                      textColor: Colors.white,
+                      onClick: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => SecondRoute()),
+                        );
+                      }, //this is where you are going to make a function for creating a new meal
+                    ),
                   ),
                 ),
               ),
