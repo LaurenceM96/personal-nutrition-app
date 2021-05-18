@@ -30,20 +30,25 @@ class _NutritionHomePageState extends State<NutritionHomePage>
 
   //The only way I could work out how to stagger the animations by a little is to create two separate ones
   //First Animation
-  late AnimationController _animationController = AnimationController(vsync: this, duration: Duration(milliseconds: 400));
-  late final Animation<double> _menuButtonOpacityAnimation = CurvedAnimation(parent: _animationController, curve: Curves.easeIn);
+  late AnimationController _animationController = AnimationController(
+      vsync: this, duration: Duration(milliseconds: 400));
+  late final Animation<double> _menuButtonOpacityAnimation = CurvedAnimation(
+      parent: _animationController, curve: Curves.easeIn);
   late final Animation<double> _menuIconRotationAnimation =
-    Tween<double>(begin: 0.0, end: 0.5).animate(CurvedAnimation(parent: _animationController, curve: Curves.ease));
+  Tween<double>(begin: 0.0, end: 0.5).animate(
+      CurvedAnimation(parent: _animationController, curve: Curves.ease));
   late final Animation<Offset> _menuButtonSlideAnimation =
-    Tween<Offset>(
+  Tween<Offset>(
       begin: Offset(0, 0.5),
       end: Offset.zero
-    ).animate(CurvedAnimation(parent: _animationController, curve: Curves.ease));
+  ).animate(CurvedAnimation(parent: _animationController, curve: Curves.ease));
 
 
   //Second Animation
-  late AnimationController _animationController2 = AnimationController(vsync: this, duration: Duration(milliseconds: 400));
-  late final Animation<double> _menuButtonTwoOpacityAnimation = CurvedAnimation(parent: _animationController2, curve: Curves.easeIn);
+  late AnimationController _animationController2 = AnimationController(
+      vsync: this, duration: Duration(milliseconds: 400));
+  late final Animation<double> _menuButtonTwoOpacityAnimation = CurvedAnimation(
+      parent: _animationController2, curve: Curves.easeIn);
   late final Animation<Offset> _menuButtonTwoSlideAnimation =
   Tween<Offset>(
       begin: Offset(0, 0.5),
@@ -73,10 +78,11 @@ class _NutritionHomePageState extends State<NutritionHomePage>
   }
 
 
-
   @override
   Widget build(BuildContext context) {
-    final Size size = MediaQuery.of(context).size;
+    final Size size = MediaQuery
+        .of(context)
+        .size;
     final navigationBarHeight = size.height / 7.5;
     return Scaffold(
       // No appbar provided to the Scaffold, only a body with a
@@ -148,13 +154,20 @@ class _NutritionHomePageState extends State<NutritionHomePage>
                 delegate: SliverChildBuilderDelegate(
                   // The builder function returns a ListTile with a title that
                   // displays the index of the current item.
-                  (context, index) => ConsumedMealListItem(
-                    mealName: consumedMeals[index],
-                    calories:
-                        meals[consumedMeals[index]].toString().split(',').first,
-                    protein:
-                        meals[consumedMeals[index]].toString().split(',').last,
-                  ),
+                      (context, index) =>
+                      ConsumedMealListItem(
+                        mealName: consumedMeals[index],
+                        calories:
+                        meals[consumedMeals[index]]
+                            .toString()
+                            .split(',')
+                            .first,
+                        protein:
+                        meals[consumedMeals[index]]
+                            .toString()
+                            .split(',')
+                            .last,
+                      ),
                   // Builds 1000 ListTiles
                   childCount: consumedMeals.length,
                 ),
@@ -186,14 +199,22 @@ class _NutritionHomePageState extends State<NutritionHomePage>
                             setState(() {
                               if (_animationController2.isCompleted) {
                                 _animationController.reverse();
-                                Future.delayed(Duration(milliseconds: 60), () {_animationController2.reverse();});
-                                Future.delayed(Duration(milliseconds: 60 + _animationController.duration!.inMilliseconds), () {setState(() {
-                                  _menuVisibility = false;
-                                });});
+                                Future.delayed(Duration(milliseconds: 60), () {
+                                  _animationController2.reverse();
+                                });
+                                Future.delayed(Duration(milliseconds: 60 +
+                                    _animationController.duration!
+                                        .inMilliseconds), () {
+                                  setState(() {
+                                    _menuVisibility = false;
+                                  });
+                                });
                               } else {
                                 _menuVisibility = true;
                                 _animationController.forward();
-                                Future.delayed(Duration(milliseconds: 60), () {_animationController2.forward();});
+                                Future.delayed(Duration(milliseconds: 60), () {
+                                  _animationController2.forward();
+                                });
                               }
                             });
                           },
@@ -244,7 +265,7 @@ class _NutritionHomePageState extends State<NutritionHomePage>
                     visible: _menuVisibility,
                     child: FloatingMenuItem(
                       width: size.width * 0.9,
-                      height: navigationBarHeight/2,
+                      height: navigationBarHeight / 2,
                       color: Colors.orange,
                       text: "Record consumed meal",
                       textColor: Colors.white,
@@ -257,7 +278,7 @@ class _NutritionHomePageState extends State<NutritionHomePage>
           ),
           Positioned(
             //This is the second of the floating menu items
-            bottom: navigationBarHeight*1.75 + size.height * 0.05,
+            bottom: navigationBarHeight * 1.75 + size.height * 0.05,
             left: size.width * 0.05,
             child: Stack(children: [
               SlideTransition(
@@ -268,14 +289,15 @@ class _NutritionHomePageState extends State<NutritionHomePage>
                     visible: _menuVisibility,
                     child: FloatingMenuItem(
                       width: size.width * 0.9,
-                      height: navigationBarHeight/2,
+                      height: navigationBarHeight / 2,
                       color: Colors.orange,
                       text: "Create new meal",
                       textColor: Colors.white,
                       onClick: () {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => SecondRoute()),
+                          MaterialPageRoute(
+                              builder: (context) => SecondRoute()),
                         );
                       }, //this is where you are going to make a function for creating a new meal
                     ),
@@ -290,19 +312,25 @@ class _NutritionHomePageState extends State<NutritionHomePage>
   }
 }
 
+// This is the widget for the second page which appears when you select
 class SecondRoute extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final Size size = MediaQuery.of(context).size;
+    final navigationBarHeight = size.height / 7.5;
     return Scaffold(
       appBar: AppBar(
         title: Text("Create a new meal"),
       ),
       body: Center(
         child: ElevatedButton(
+          // width: size.width * 0.9,
+          // height: navigationBarHeight/2,
+          //color: Colors.orange,
           onPressed: () {
             Navigator.pop(context);
           },
-          child: Text('Manns got me working on the sabath now at 10pm, you get me?'),
+          child: Text('Return to home.'),
         ),
       ),
     );
