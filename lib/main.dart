@@ -1,5 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:nutrition_app/FloatingMenuItem.dart';
+import 'package:nutrition_app/CustomShapedNavBar.dart';
 
 void main() => runApp(MyApp());
 
