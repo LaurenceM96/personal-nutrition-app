@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:nutrition_app/FloatingMenuItem.dart';
 import 'package:nutrition_app/CustomShapedNavBar.dart';
+import 'package:nutrition_app/CreateNewMeal.dart';
 
 void main() => runApp(MyApp());
 
@@ -158,11 +159,10 @@ class SecondRoute extends StatelessWidget {
         title: Text("Create a new meal"),
       ),
       body: Center(
-        child: ElevatedButton(
+        child: NewButton(
           onPressed: () {
             Navigator.pop(context);
           },
-          child: Text('Manns got me working on the sabath now at 10pm, you get me?'),
         ),
       ),
     );
