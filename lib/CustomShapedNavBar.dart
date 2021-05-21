@@ -60,10 +60,46 @@ class _CustomShapedNavBarState extends State<CustomShapedNavBar>
 
   bool _menuVisibility = false;
 
+  void openMenu() {
+    _menuVisibility = true;
+    for (int i = 0; i < _animationControllers.length; i++) {
+      Future.delayed(Duration(milliseconds: 60 * i),
+              () {
+            _animationControllers[i].forward();
+          });
+    }
+  }
+
+  void closeMenu() {
+    for (int i = 0; i < _animationControllers.length; i++) {
+      Future.delayed(Duration(milliseconds: 60 * i),
+              () {
+            _animationControllers[i].reverse();
+          });
+    }
+    Future.delayed(
+        Duration(
+            milliseconds: 60 +
+                _animationControllers[0]
+                    .duration!
+                    .inMilliseconds), () {
+      setState(() {
+        _menuVisibility = false;
+      });
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Stack(
       children: <Widget>[
+        //This if statement makes the menu close if user clicks outside the menu
+        if (_menuVisibility) Positioned.fill(child:
+          GestureDetector(
+              onTap: closeMenu,
+              child: Container(color: Colors.transparent)
+          )
+        ),
         Positioned(
           //This is the beginning on the nav bar
           bottom: 0,
@@ -88,34 +124,9 @@ class _CustomShapedNavBarState extends State<CustomShapedNavBar>
                         onPressed: () {
                           setState(() {
                             if (_animationControllers[0].isCompleted) {
-                              for (int i = 0;
-                              i < _animationControllers.length;
-                              i++) {
-                                Future.delayed(Duration(milliseconds: 60 * i),
-                                        () {
-                                      _animationControllers[i].reverse();
-                                    });
-                              }
-                              Future.delayed(
-                                  Duration(
-                                      milliseconds: 60 +
-                                          _animationControllers[0]
-                                              .duration!
-                                              .inMilliseconds), () {
-                                setState(() {
-                                  _menuVisibility = false;
-                                });
-                              });
+                              closeMenu();
                             } else {
-                              _menuVisibility = true;
-                              for (int i = 0;
-                              i < _animationControllers.length;
-                              i++) {
-                                Future.delayed(Duration(milliseconds: 60 * i),
-                                        () {
-                                      _animationControllers[i].forward();
-                                    });
-                              }
+                              openMenu();
                             }
                           });
                         },
@@ -155,6 +166,7 @@ class _CustomShapedNavBarState extends State<CustomShapedNavBar>
           ),
         ),
         Stack(children: [
+          //for loop to create each button passed in
           for (var i = 0; i < menuItems.length; i++)
             Positioned(
                 bottom: navBarHeight + menuItems[i].height * i * 1.35 + navBarHeight * 0.3,
