@@ -2,7 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:nutrition_app/FloatingMenuItem.dart';
 import 'package:nutrition_app/CustomShapedNavBar.dart';
-import 'package:nutrition_app/CreateNewMeal.dart';
+import 'package:nutrition_app/RossButton.dart';
 
 void main() => runApp(MyApp());
 
@@ -158,16 +158,56 @@ class SecondRoute extends StatelessWidget {
       appBar: AppBar(
         title: Text("Create a new meal"),
       ),
-      body: Center(
-        child: NewButton(
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
-      ),
+
+        body: Column(
+        mainAxisAlignment: MainAxisAlignment.end,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: <Widget> [
+
+          Container(
+              child: Padding(
+                  padding: EdgeInsets.only(top: 10, left:35, bottom: 10),
+                  child: NewButton1(
+                      onPressed: () {}
+                  )
+              )
+          ),
+
+          Container(
+              child: Padding(
+              padding: EdgeInsets.only(top: 10, left:35, bottom: 10),
+              child: NewButton2(
+                  onPressed: () {}
+              )
+              )
+          ),
+
+
+          Container(
+              child: Padding(
+                  padding: EdgeInsets.only(top: 10, left:35, bottom: 10),
+                  child: NewButton3(
+                      onPressed: () {}
+                  )
+              )
+          ),
+
+          Container(
+              child: Padding(
+                  padding: EdgeInsets.only(top: 10, left:35, bottom: 20),
+                  child: NewButton4(
+                      onPressed: () {}
+                  )
+              )
+          ),
+
+        ]
+      )
     );
   }
 }
+
+
 
 class ConsumedMealListItem extends StatelessWidget {
   const ConsumedMealListItem({
