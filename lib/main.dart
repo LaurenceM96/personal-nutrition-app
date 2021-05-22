@@ -166,8 +166,9 @@ class SecondRoute extends StatelessWidget {
 
           Container(
               child: Padding(
-                  padding: EdgeInsets.only(top: 10, left:35, bottom: 10),
-                  child: NewButton1(
+                  padding: EdgeInsets.only(top: 10, left:33.333, bottom: 10),
+                  child: NewButton(
+                      text: "Breakfast",
                       onPressed: () {}
                   )
               )
@@ -175,8 +176,9 @@ class SecondRoute extends StatelessWidget {
 
           Container(
               child: Padding(
-              padding: EdgeInsets.only(top: 10, left:35, bottom: 10),
-              child: NewButton2(
+              padding: EdgeInsets.only(top: 10, left:33.333, bottom: 10),
+              child: NewButton(
+                  text: "  Lunch  ",
                   onPressed: () {}
               )
               )
@@ -185,8 +187,9 @@ class SecondRoute extends StatelessWidget {
 
           Container(
               child: Padding(
-                  padding: EdgeInsets.only(top: 10, left:35, bottom: 10),
-                  child: NewButton3(
+                  padding: EdgeInsets.only(top: 10, left:33.333, bottom: 10),
+                  child: NewButton(
+                      text: "  Dinner  ",
                       onPressed: () {}
                   )
               )
@@ -194,8 +197,9 @@ class SecondRoute extends StatelessWidget {
 
           Container(
               child: Padding(
-                  padding: EdgeInsets.only(top: 10, left:35, bottom: 20),
-                  child: NewButton4(
+                  padding: EdgeInsets.only(top: 10, left:33.333, bottom: 20),
+                  child: NewButton(
+                      text: "  Other  ",
                       onPressed: () {}
                   )
               )
