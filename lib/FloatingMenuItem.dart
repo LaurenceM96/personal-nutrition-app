@@ -32,6 +32,7 @@ class FloatingMenuItem extends StatelessWidget { //this is the floating menu ite
         //The Inkwell needs to be wrapped in Material widget so the ripple effect shows
         color: Colors.transparent,
         child: InkWell(
+          borderRadius: BorderRadius.circular(25.0),
           //This is a widget that provides onTap functionality
           onTap: () => onClick(),
           child: Column(
